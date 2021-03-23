@@ -1,0 +1,421 @@
+{
+	"info": {
+		"_postman_id": "f466ec95-d3a9-491d-9f9f-eef8affcc256",
+		"name": "Todoist",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TASKS",
+			"item": [
+				{
+					"name": "Get Active Tasks",
+					"item": [
+						{
+							"name": "Get Active Tasks",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Creator is correct\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"33138911\");\r",
+											"});\r",
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"First project ID is correct\", function () {\r",
+											"    pm.expect(jsonData[0].id).to.eql(4681988019);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.todoist.com/rest/v1/tasks",
+									"protocol": "https",
+									"host": [
+										"api",
+										"todoist",
+										"com"
+									],
+									"path": [
+										"rest",
+										"v1",
+										"tasks"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create a New Task",
+					"item": [
+						{
+							"name": "Create a Task",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Creator\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"33138911\");\r",
+											"});\r",
+											"var jsonData = pm.response.json();\r",
+											"var contenido = pm.environment.get(\"Task name\");\r",
+											"pm.test(\"Content is correct\", function () {\r",
+											"    pm.expect(jsonData.content).to.eql(contenido);\r",
+											"});\r",
+											"\r",
+											"pm.environment.set(\"Task ID\", jsonData.id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-Id",
+										"value": "$(uuidgen)",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"content\": \"Buy Milk\", \r\n    \"due_string\": \"tomorrow at 12:00\",\r\n    \"due_lang\": \"en\",\r\n    \"priority\": 4\r\n}"
+								},
+								"url": {
+									"raw": "{{base url}}",
+									"host": [
+										"{{base url}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a Task BAD",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Creator\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"33138911\");\r",
+											"});\r",
+											"var jsonData = pm.response.json();\r",
+											"var contenido = pm.environment.get(\"Task name\");\r",
+											"pm.test(\"Content is correct\", function () {\r",
+											"    pm.expect(jsonData.content).to.eql(contenido);\r",
+											"});\r",
+											"\r",
+											"pm.environment.set(\"Task ID\", jsonData.id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-Id",
+										"value": "$(uuidgen)",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"content\": \"Get beer\", \r\n    \"due_string\": \"tomorrow at 17:00\",\r\n    \"due_lang\": \"es\",\r\n    \"priority\": 4\r\n}"
+								},
+								"url": {
+									"raw": "{{base url}}",
+									"host": [
+										"{{base url}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get an Active Task",
+					"item": [
+						{
+							"name": "Get an Active Task",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Creator\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"33138911\");\r",
+											"});\r",
+											"var jsonData = pm.response.json();\r",
+											"var contenido = pm.environment.get(\"Task name\");\r",
+											"pm.test(\"Content is correct\", function () {\r",
+											"    pm.expect(jsonData.content).to.eql(contenido);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base url}}/{{Task ID}}",
+									"host": [
+										"{{base url}}"
+									],
+									"path": [
+										"{{Task ID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update a Task",
+					"item": [
+						{
+							"name": "Update a Task",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-Id",
+										"value": "$(uuidgen)",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"content\": \"Buy Coffee\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base url}}/{{Task ID}}",
+									"host": [
+										"{{base url}}"
+									],
+									"path": [
+										"{{Task ID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Close a Task",
+					"item": [
+						{
+							"name": "Close a Task",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base url}}/{{Task ID}}/close",
+									"host": [
+										"{{base url}}"
+									],
+									"path": [
+										"{{Task ID}}",
+										"close"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Reopen a Task",
+					"item": [
+						{
+							"name": "Reopen a Task",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"var ID_code = pm.environment.get(\"Task ID\");\r",
+											"pm.test(\"Your test name\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.id).to.eql(ID_code);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base url}}/{{Task ID}}/reopen",
+									"host": [
+										"{{base url}}"
+									],
+									"path": [
+										"{{Task ID}}",
+										"reopen"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete a Task",
+					"item": [
+						{
+							"name": "Delete a Task",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base url}}/{{Task ID}}",
+									"host": [
+										"{{base url}}"
+									],
+									"path": [
+										"{{Task ID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{Token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{Token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 2xx\", function () {",
+					"    pm.response.to.be.success;",
+					"})",
+					"pm.test(\"Response time is less than 700ms\", function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(700);",
+					"});"
+				]
+			}
+		}
+	]
+}
